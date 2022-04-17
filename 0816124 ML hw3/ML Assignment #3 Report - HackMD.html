@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="csrf-token" content="GqPmm305-lcWegPPyYWh9JwaRta_MoW3iJHg">
+    
+    
+    <meta name="description" content="# ML Assignment #3 Report - name: 林浩君 - student ID: 0816124  ## K-means Clustering  ### 1-2. Data In">
+    
+    <title>ML Assignment #3 Report - HackMD</title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+	<link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+    
+<script nonce="9ac13ddc-78d9-4819-b5a8-ada87d9084ea">
+  window.domain = 'hackmd.io'
+  window.urlpath = ''
+  window.debug = false
+  window.version = '1.3.0'
+  window.brand = 'HackMD'
+
+  
+  window.NOTE_ID = 'KHGk1EBQQ1CpQ1n08qirig'
+  
+
+  window.GOOGLE_API_KEY = 'AIzaSyCjSrqWHhmWJnoI7JlD88XDSaBgiKbaenA'
+  window.GOOGLE_CLIENT_ID = '911617723593-drikdibvvn63slfd6kbqigo8ql1no55s.apps.googleusercontent.com'
+  window.DROPBOX_APP_KEY = 'rdoizrlnkuha23r'
+  
+  window.PLANTUML_SERVER = 'https://ptuml.hackmd.io'
+
+  window.ASSET_URL = 'https://assets.hackmd.io'
+
+  window.USER_CAN_CREATE_TEAM = true
+  window.USER_CAN_DELETE_ACCOUNT = true
+  window.USER_DELETE_ACCOUNT_VIA_EMAIL = true
+  window.PAYMENT_ENABLED = true
+  window.PAYMENT_PROMOTION_BANNER_ENABLED = 
+  window.PERSONAL_PLAN_ENABLE = true
+  window.GITHUB_SYNC_ENABLED = true
+  window.GITLAB_SYNC_ENABLED = false
+  window.GITLAB_SYNC_BASE_URL = ''
+  window.VCS_SYNC_MODE = 'github'
+  window.VCS_PROVIDER_NAME = 'GitHub'
+  window.FREE_TEAM_NUM = 20
+  window.FREE_TEAM_MEMBER_NUM = 3
+  window.FREE_PUBLIC_TEAM_NUM = 10
+  
+  window.EE_SITE_ENABLE = false
+  window.EE_SITE_NAME = 'false'
+  window.EE_SITE_LINK = 'false'
+  window.EESITE_INFO = false
+  window.ENTERPRISE_DISCOVERY_ENABLE = false
+  window.ENTERPRISE_DISCOVERY_TEAM = true
+  window.ENTERPRISE_DISCOVERY_NOTE = true
+  window.ENTERPRISE_DISCOVERY_VIEW_PERMISSION = 'guest'
+  
+  window.ALLOW_ANONYMOUS = true
+  window.ALLOW_ANONYMOUS_EDIT = false
+  window.PUBLIC_OVERVIEW = false
+  window.INTERNAL_PUBLIC_OVERVIEW = false
+  window.FULL_TEXT_SEARCH_ENABLE = false
+
+  
+  window.SHOW_HOT_NOTES = false
+  
+
+  
+  window.HOT_NOTES_TIME_TYPE = 'week'
+  
+
+  
+  window.SHOW_OVERVIEW = true
+  
+
+  window.USE_CDN = false
+
+  
+  window.MENTIONS = {}
+  
+
+  
+  window.MENTION_ANCHORS = []
+  
+
+  
+  window.COMMENT_ANCHORS = []
+  
+
+  
+  window.IS_OWNER = true
+  
+
+  
+  window.IS_TEAM_ADMIN = false
+  
+
+  
+
+  
+  window.USER_PROFILE = {"name":"林浩君","userpath":"BhNYiK1fRTK1tqlzphXMbg","photo":"https://lh3.googleusercontent.com/a/AATXAJy5qxQJWxpVOOFRo2GQoGLa_TGb22KN-F3nG_ad=s96-c","userid":"06135888-ad5f-4532-b5b6-a973a615cc6e"}
+  
+
+  
+  window.VERSION_TIME = '1637257309768'
+  
+
+  
+  window.canEdit = true
+  
+
+  
+  window.canWriteComment = true
+  
+</script>
+
+
+    
+<!-- Google Tag Manager -->
+<script nonce="9ac13ddc-78d9-4819-b5a8-ada87d9084ea">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KLW9Z3');</script>
+<!-- End Google Tag Manager -->
+
+
+    <meta property="fb:app_id" content="1436904003272070">
+
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/a/AATXAJy5qxQJWxpVOOFRo2GQoGLa_TGb22KN-F3nG_ad=s96-c" />
+
+<meta name="twitter:site" content="@hackmdio" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="ML Assignment #3 Report - HackMD" />
+
+<meta name="twitter:description" content="# ML Assignment #3 Report - name: 林浩君 - student ID: 0816124  ## K-means Clustering  ### 1-2. Data In" />
+
+
+<meta property="og:image" content="https://lh3.googleusercontent.com/a/AATXAJy5qxQJWxpVOOFRo2GQoGLa_TGb22KN-F3nG_ad=s96-c" />
+
+<meta property="og:site_name" content="HackMD" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="ML Assignment #3 Report - HackMD" />
+
+<meta property="og:description" content="# ML Assignment #3 Report - name: 林浩君 - student ID: 0816124  ## K-means Clustering  ### 1-2. Data In" />
+
+
+	
+    <link rel="stylesheet" href='https://assets.hackmd.io/build/emojify.js/dist/css/basic/emojify.min.css'>
+     <link href="https://assets.hackmd.io/build/font-vendor.808f75da673962c80518.css" rel="stylesheet"><link href="https://assets.hackmd.io/build/common-vendor.1233bc7a27f833ea4984.css" rel="stylesheet"><link href="https://assets.hackmd.io/build/pretty-vendor.384d1aed526f4021254e.css" rel="stylesheet"><link href="https://assets.hackmd.io/build/pretty.56852076ef4e11f75cac.css" rel="stylesheet">
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+<![endif]-->
+
+</head>
+
+<body style="display:none;">
+    <div class="ui-infobar container-fluid unselectable hidden-print">
+        <div class="row">
+            <div class="col-xs-12 ui-infobar-inner">
+                <div class="ui-infobar__user-info">
+                    <ul class="list-inline">
+                        <li>
+                            
+                                <span class="ui-lastchangeuser" data-profile="BhNYiK1fRTK1tqlzphXMbg">&thinsp;<a class="ui-user-icon small" style="background-image: url(https://lh3.googleusercontent.com/a/AATXAJy5qxQJWxpVOOFRo2GQoGLa_TGb22KN-F3nG_ad=s96-c);" target="_blank"></a></span>
+                            
+                            &nbsp;<span class="text-uppercase ui-status-lastchange"></span>
+                            <span class="ui-lastchange text-uppercase" data-createtime="Thu Nov 18 2021 16:03:51 GMT+0000 (Coordinated Universal Time)" data-updatetime="Thu Nov 18 2021 17:41:49 GMT+0000 (Coordinated Universal Time)"></span>
+                        </li>
+                        
+                        
+                        <li>
+                            <span class="ui-more-info hmd-dn" data-toggle="popover">
+                                &thinsp;<i class="fa fa-info-circle" aria-hidden="true"></i>
+
+                                <div class="more-info-raw hmd-dn">
+                                    <span class="ui-published-note note-status-row hmd-dn">
+                                        <i class="fa fa-globe" aria-hidden="true" style="margin-top: 1px;"></i>
+                                        公開筆記
+                                    </span>
+
+                                    <span class="ui-connectedGithub note-status-row hmd-dn">
+                                        <i class="fa fa-20 ui-connectedGithubIcon fa-github"></i>
+
+                                        <span>與 GitHub 同步</span>
+
+                                        <br>
+
+                                        <a class="file-path" target="_blank"></a>
+                                    </span>
+                                </div>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="hmd-text-right ui-infobar__actions">
+                    <ul class="list-inline">
+                        <li>
+                            
+                                <span class="community-button ui-like hidden-xs "  data-toggle="tooltip" data-placement="bottom" title="讚賞"><i class="fa fa-fw"></i><span class="text">讚賞</span><span class="count"></span></span>
+                                <span class="community-button ui-bookmark  hidden-xs" data-toggle="tooltip" data-placement="bottom" title="收藏"><i class="fa fa-fw"></i><span class="text"><span class="bookmark-label">收藏</span><span class="bookmarked-label">已收藏</span></span></span>
+                                
+                                    <div class="ui-notification dropdown is-watch">
+                                        <span id="notificationLabel" class="ui--subscribed hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <div  class="ui-notification-status community-button" data-toggle="tooltip" data-placement="bottom" title="訂閱">
+                                                <i class="fa fa-fw fa-bell"></i><span class="text">已訂閱<i class="fa fa-fw fa-angle-down"></i><i class="fa fa-fw fa-angle-up"></i></span>
+                                            </div>
+                                        </span>
+                                        <ul class="dropdown-menu" aria-labelledby="notificationLabel">
+                                            <li class="ui-notification-watch notification-menu-item is-checked"><i class="fa fa-check fa-fw"></i><i class="fa fa-bell fa-fw"></i><div class="info"><div class="title">所有通知</div><div class="description">當有任何變更時將會收到通知</div></div></li>
+                                            <li class="ui-notification-mention notification-menu-item "><i class="fa fa-check fa-fw"></i><i class="fa fa-at fa-fw"></i><div class="info"><div class="title">提及我</div><div class="description">當有人提及我時才會收到通知</div></div></li>
+                                            <li class="divider"></li>
+                                            <!--
+                                                <li class="ui-notification-list notification-menu-item"><span><a href="#"><i class="fa fa-list-ul fa-fw"></i>我的訂閱列表</a></span></li>
+                                            -->
+                                            <li class="ui-notification-unsubscribe notification-menu-item"><i class="fa fa-bell-slash-o fa-fw"></i>取消訂閱</li>
+                                        </ul>
+                                        <span class="ui-notification-subscribe community-button hidden-xs"><i class="fa fa-fw fa-bell-o"></i><span class="text">訂閱</span></span>
+                                    </div>
+                                
+                            
+                        </li>
+                        
+                            <li>
+                                <a href="#" class="ui-edit btn btn-default btn-md"><i class="fa fa-pencil"></i> <span class="hidden-xs" style="margin-left: 3px">編輯</span></a>
+                            </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        
+        <div class="ui-comment-app" id="hackmd-app">
+            <div id="comment-app"></div>
+        </div>
+        
+    </div>
+
+    <!-- Markdown rendered container -->
+    <div id="doc" class="container-fluid markdown-body" data-hard-breaks="true"># ML Assignment #3 Report
+- name: 林浩君
+- student ID: 0816124
+
+## K-means Clustering
+
+### 1-2. Data Input and Data Preprocessing
+- 從txt檔裡讀取資料存成DataFrame
+- 對DataFrame shuffle
+
+![](https://i.imgur.com/12xwDS7.png)
+
+### 3. K-means Clustering
+- 首先將dataset切成x(features), y(labels)
+- 照著pseudocode實作演算法, 並回傳
+    - centers: 中心點座標
+    - clusters: 每個點所屬的cluster index
+```
+def k_means(x, k):
+    centers = np.array(x.sample(k))
+    clusters = np.zeros(len(x))
+    iterations = 100
+    
+    for iteration in range(iterations):
+        for idx, data in enumerate(x.iloc):
+            distance = [np.linalg.norm(center - data) for center in centers]
+            clusters[idx] = np.argmin(distance)        
+        centers = [np.array(x[clusters == idx]).mean(0) for idx in range(k)]
+    
+    return centers, clusters
+```
+
+### 5. Results
+- 對於每個cluster, 用實際的label去統計這個cluster中的分布, 再以數量最多的當作predict label
+
+![](https://i.imgur.com/xmVN02e.png)
+- 對以上case而言
+    - cluster 1 的預測label為1
+    - cluster 2 的預測label為3
+    - cluster 3 的預測label為2
+- 以上述的預測label來產生y_pred, 得到result
+
+![](https://i.imgur.com/78QIQac.png)
+
+### 6. Comparison &amp; Conclusion
+- k-means做出來效果比我想像中好, 我原本以為這麼簡單的演算法做不太起來
+
+### 7. Questions
+- 選擇第1, 5個feature去做k-means, 並跟上面一樣用該cluster最多的label數來當作預測label
+
+![](https://i.imgur.com/GiR3zxT.png)
+
+## Support Vector Machine
+
+### 1-2. Data Input and Data Preprocessing
+- 從txt檔裡讀取資料存成DataFrame
+
+![](https://i.imgur.com/1lvbS2k.png)
+
+### 4. Support Vector Machine
+- 把holdout validation中的training set丟下去做5-fold validation算出average accuracy
+- 利用sklearn裡的svm跟k-fold實做, 結果在 5. result 以及 7. question
+- Best hyperparameter founded
+    - Polynomial kernel
+        ![](https://i.imgur.com/5JduMKM.png)
+    - RBF kernel
+        ![](https://i.imgur.com/JzNmsB2.png)
+
+
+### 5. Results
+- Linear kernel
+
+![](https://i.imgur.com/ZNATsBe.png)
+
+- Polynomial kernel
+
+![](https://i.imgur.com/8cUzlxx.png)
+
+- RBF kernel
+
+![](https://i.imgur.com/fmkZPiH.png)
+
+### 6. Comparison &amp; Conclusion
+- 表現排序分別是 linear &lt; polynomial &lt; RBF, 越複雜的曲線表現越好
+
+### 7. Question
+- Polynomial kernel
+    - Choose degrees = [0.5, 1, 5]
+    - Choose gammas = [0.5, 1, 5]
+    - Choose coef0s = [0.5, 1, 5]
+
+![](https://i.imgur.com/iyUHYtf.png)
+
+- RBF kernel
+    - Choose gammas = [0.001, 0.01, 0.1, 1, 10, 100, 1000]
+
+![](https://i.imgur.com/JLIliEw.png)
+
+</div>
+
+    <div class="document-footer container-fluid hmd-pb-2 hidden-print">
+        <hr>
+        <div class="footer hmd-flex hmd-items-center">
+    <div class="footer__published-by hmd-flex-grow-1">
+        <span>發表於</span> <strong><a href="https://hackmd.io/" target="_blank"><i class="fa fa-file-text"></i> <span class="brand">HackMD</span></a></strong>
+    </div>
+    <div class="footer__views" style="margin-right: 18px;">
+        <i class="fa fa-eye"></i> <span class="ui-viewcount">6</span>
+    </div>
+    <div class="footer__views">
+    
+        <span class="community-button ui-like " data-toggle="tooltip" data-placement="top" title="讚賞"><i class="fa fa-fw"></i><span class="text hidden-xs">讚賞</span><span class="count"></span></span>
+        <span class="community-button ui-bookmark " data-toggle="tooltip" data-placement="top" title="收藏"><i class="fa fa-fw"></i><span class="text hidden-xs"><span class="bookmark-label">收藏</span><span class="bookmarked-label">已收藏</span></span></span>
+        
+            <div class="ui-notification dropup dropdown is-watch">
+                <span id="notificationLabel" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <div class="community-button"  data-toggle="tooltip" data-placement="top" title="訂閱">
+                        <i class="fa fa-fw fa-bell"></i><span class="text hidden-xs">已訂閱<i class="fa fa-fw fa-angle-down"></i><i class="fa fa-fw fa-angle-up"></i></span>
+                    </div>
+                </span>
+                <ul class="dropdown-menu pull-right" aria-labelledby="notificationLabel">
+                    <li class="ui-notification-watch notification-menu-item is-checked"><i class="fa fa-check fa-fw"></i><i class="fa fa-bell fa-fw"></i><div class="info"><div class="title">所有通知</div><div class="description" >當有任何變更時將會收到通知</div></div></li>
+                    <li class="ui-notification-mention notification-menu-item "><i class="fa fa-check fa-fw"></i><i class="fa fa-at fa-fw"></i><div class="info"><div class="title">提及我</div><div class="description">當有人提及我時才會收到通知</div></div></li>
+                    <li class="divider"></li>
+                    <!--
+                        <li class="ui-notification-list notification-menu-item"><span><a href="#"><i class="fa fa-list-ul fa-fw"></i>我的訂閱列表</a></span></li>
+                    -->
+                    <li class="ui-notification-unsubscribe notification-menu-item"><i class="fa fa-bell-slash-o fa-fw"></i>取消訂閱</li>
+                </ul>
+                <span class="ui-notification-subscribe community-button"><i class="fa fa-fw fa-bell-o"></i><span class="text hidden-xs">訂閱</span></span>
+            </div>
+        
+    
+    </div>
+</div>
+
+    </div>
+
+    <div class="ui-community unselectable hidden-print hidden-xs" style="display: none;">
+        
+            <div class="community-button ui-like " title="讚賞" data-toggle="tooltip" data-placement="right" data-offset="0,5"><i class="fa fa-fw"></i><div class="count"></div></div>
+            <div class="community-button ui-bookmark " title="收藏" data-toggle="tooltip" data-placement="right" data-offset="0,5"><i class="fa fa-fw"></i></div>
+            
+                <div class="ui-notification dropup dropdown is-watch" title="訂閱" data-toggle="tooltip" data-placement="right" data-offset="0,5">
+                    <div id="notificationLabel" class="community-button" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <div  class="ui-notification-status"><i class="fa fa-fw fa-bell"></i></div>
+                    </div>
+                    <ul class="dropdown-menu left" aria-labelledby="notificationLabel">
+                        <li class="ui-notification-watch notification-menu-item is-checked"><i class="fa fa-check fa-fw"></i><i class="fa fa-bell fa-fw"></i><div class="info"><div class="title">所有通知</div><div class="description">當有任何變更時將會收到通知</div></div></li>
+                        <li class="ui-notification-mention notification-menu-item "><i class="fa fa-check fa-fw"></i><i class="fa fa-at fa-fw"></i><div class="info"><div class="title">提及我</div><div class="description">當有人提及我時才會收到通知</div></div></li>
+                        <li class="divider"></li>
+                        <!--
+                           <li class="ui-notification-list notification-menu-item"><span><a href="#"><i class="fa fa-list-ul fa-fw"></i>我的訂閱列表</a></span></li>
+                        -->
+                        <li class="ui-notification-unsubscribe notification-menu-item"><i class="fa fa-bell-slash-o fa-fw"></i>取消訂閱</li>
+                    </ul>
+                    <div class="ui-notification-subscribe community-button"><i class="fa fa-fw fa-bell-o"></i></div>
+                </div>
+            
+        
+    </div>
+
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-left dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="目錄">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+            </ul>
+        </div>
+    </div>
+
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="display:none;"></div>
+    
+
+    <div class="clearfix"></div>
+
+    <!-- signin modal -->
+<div class="modal fade signin-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 10px; right: 20px; position: absolute;"><span aria-hidden="true">&times;</span></button>
+            
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<h3>登入</h3>
+
+<form data-toggle="validator" role="form" class="form-horizontal" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="hmd-dn"><input type="hidden" name="_csrf" value="GqPmm305-lcWegPPyYWh9JwaRta_MoW3iJHg"></div>
+    <div class="hmd-dn"><input type="hidden" name="create_team" value="false"></div>
+    <div class="hmd-dn"><input type="hidden" name="create_paid_team" value="false"></div>
+    <div class="form-group  ">
+        <label for="email" class="control-label">Email</label>
+        <label for="inputEmail" class="control-label pull-right errors">
+            
+        </label>
+        <span class="help-block control-label with-errors pull-right" style="display: inline;"></span>
+        <div class="input-block">
+            
+                <input type="email" class="form-control" name="email" placeholder="您的 Email" required autocomplete="email">
+            
+            <span class="error-sign"></span>
+        </div>
+    </div>
+    <div class="form-group ">
+        <label for="password" class="control-label">密碼</label>
+        <label for="inputPassword" class="control-label pull-right errors">
+            
+        </label>
+        <span class="help-block control-label with-errors pull-right" style="display: inline;"></span>
+        <div class="input-block">
+            <input type="password" class="form-control" name="password" placeholder="您的密碼" required autocomplete="current-password">
+            <span class="error-sign"></span>
+            
+                <span class="control-label pull-right" style="font-size: 13px; margin-top: 5px;"><a href="https://hackmd.io/settings/forgotPassword" style="text-decoration: underline;">忘記密碼</a></span>
+            
+        </div>
+    </div>
+
+    <div style="text-align: center; padding-top: 15px; margin-bottom: 0px;">
+        
+            <input type="submit" class="btn btn-success btn-large" formaction="https://hackmd.io/login" value="登入">
+        
+
+        
+    </div>
+</form>
+
+
+
+
+
+
+
+
+    
+        <p class="separator">或是</p>
+    
+
+    
+        <p>繼續登入，代表您同意<a href="https://hackmd.io/s/terms" target="_blank">服務條款</a>。</p>
+    
+
+    <div class="social-buttons-container">
+    
+    <a href="https://hackmd.io/auth/facebook" class="btn btn-lg btn-block btn-social btn-facebook">
+        <i class="fa fa-facebook"></i> 透過 Facebook 登入
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/twitter" class="btn btn-lg btn-block btn-social btn-twitter">
+        <i class="fa fa-twitter"></i> 透過 Twitter 登入
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/github" class="btn btn-lg btn-block btn-social btn-github">
+        <i class="fa fa-github"></i> 透過 GitHub 登入
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/dropbox" class="btn btn-lg btn-block btn-social btn-dropbox">
+        <i class="fa fa-dropbox"></i> 透過 Dropbox 登入
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/google" class="btn btn-lg btn-block btn-social btn-google">
+        <i class="icon icon-google"></i> 透過 Google 登入
+    </a>
+    
+    
+</div>
+
+
+
+
+
+    <div >
+        <p>第一次使用 HackMD？ <a href="https://hackmd.io/join">註冊</a></p>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-60728495-1"></script>
+<script nonce="9ac13ddc-78d9-4819-b5a8-ada87d9084ea">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    let userid = (document.cookie.match('(^|; )userid=([^;]*)')||0)[2];
+    gtag('config', 'UA-60728495-1', {'user_id': userid});
+</script>
+<script src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js" crossorigin="anonymous"></script>
+<script nonce="9ac13ddc-78d9-4819-b5a8-ada87d9084ea">Sentry.init({ dsn: 'https://73410f1915d84abc8b2dd1f1aabd1c82@sentry.hackmd.dev/4', environment: 'production', integrations: function (intrus) { return intrus.filter(function (itr) { return itr.name !== 'TryCatch' }) } });</script>
+
+
+    
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KLW9Z3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+    <script src="https://hackmd.io/api/i18n.js"></script>
+    
+         <script src="https://assets.hackmd.io/build/font-vendor.5ba1bda23ba5a8acfb08.js" defer="defer"></script><script src="https://assets.hackmd.io/build/common-vendor.a47b470427920f6a2576.js" defer="defer"></script><script src="https://assets.hackmd.io/build/pretty-vendor.0d4b711efbcbf0681727.js" defer="defer"></script><script src="https://assets.hackmd.io/build/pretty-common.8d9d35d8628867fb9457.js" defer="defer"></script><script src="https://assets.hackmd.io/build/pretty.2bb850731f4eb8326cda.js" defer="defer"></script>
+    
+    
+
+</body>
+</html>
